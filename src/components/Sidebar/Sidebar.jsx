@@ -17,7 +17,7 @@ const firstGroup = [
 const secondGroup = [
   {
     title: 'Create',
-    href: '/dashboard/add-new',
+    href: '/dashboard/create-job-offer',
     icon: 'plus',
   },
   {
@@ -67,8 +67,6 @@ const fourthGroup = [
     icon: 'logs',
   },
 ];
-
-const ICON_COLOR = '#959499';
 
 const DashboardSidebar = () => {
   return (
