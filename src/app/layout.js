@@ -2,6 +2,9 @@ import { Providers } from '@/lib/queryClient';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 
+import { Suspense } from 'react';
+import Loading from './loading.js';
+
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
@@ -24,7 +27,9 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased dark p-6 h-dvh`}
       >
         <main className="h-full">
-          <Providers>{children}</Providers>
+          <Providers>
+            {children}
+          </Providers>
         </main>
       </body>
     </html>

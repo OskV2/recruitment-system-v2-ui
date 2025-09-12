@@ -40,7 +40,7 @@ const TableContractTypes = () => {
     },
   });
 
-  //  ! ALSO LOADING NEEDS TO BE FIXED
+  //  ! ALSO LOADING NEEDS TO BE IMPROVED BECAUSE NOW ITS JUST P  
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Something went wrong</p>;
 
