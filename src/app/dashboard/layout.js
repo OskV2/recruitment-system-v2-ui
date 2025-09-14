@@ -1,6 +1,15 @@
-import Sidebar from '@/components/Sidebar/Sidebar';
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-const dashboardLayout = ({ children }) => {
+import Sidebar from '@/components/Sidebar/Sidebar';
+import LogoutButton from "@/components/LogoutButton";
+
+const dashboardLayout = async ({ children }) => {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("token")?.value;
+
+  if (!token) redirect("/login");
+
   return (
     <>
       <div className='flex flex-row h-full gap-6'>
@@ -9,6 +18,7 @@ const dashboardLayout = ({ children }) => {
           <div className='flex flex-row'>
             <p>Search / breadcrumbs here</p>
             <p>Something different here (top right)</p>
+            <LogoutButton />  
           </div>
           {children}
         </div>

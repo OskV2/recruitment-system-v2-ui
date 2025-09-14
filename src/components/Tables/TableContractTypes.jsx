@@ -13,7 +13,7 @@ import {
 import { Pencil, Trash2Icon } from 'lucide-react';
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { getAllContractTypes, createContractType } from '@/api/contract-type';
+import { getAllContractTypes, createContractType } from '@/lib/api/contract-type';
 
 const TableContractTypes = () => {
   const queryClient = useQueryClient();

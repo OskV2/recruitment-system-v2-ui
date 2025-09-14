@@ -13,7 +13,7 @@ import {
 import { Pencil, Trash2Icon } from 'lucide-react';
 
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { getAllLocations, createLocation } from '@/api/location';
+import { getAllLocations, createLocation } from '@/lib/api/location';
 
 const TableLocations = () => {
   const queryClient = useQueryClient();
