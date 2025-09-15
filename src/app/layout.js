@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased dark p-6 h-dvh`}
       >
-        <main className="h-full">
+        <main className="h-full relative">
           <Providers>
             {children}
           </Providers>

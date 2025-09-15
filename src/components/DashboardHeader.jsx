@@ -15,7 +15,8 @@ const DashboardHeader = () => {
 
   return (
     <p>
-      Hi, {loggedUser.name}! {item}.
+      {loggedUser && `Hi, ${loggedUser.name}! ${item}.`}
+      Hi!
     </p>
   );
 };
