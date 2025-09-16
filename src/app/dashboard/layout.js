@@ -7,7 +7,6 @@ import LogoutButton from "@/components/LogoutButton";
 const dashboardLayout = async ({ children }) => {
   const cookieStore = await cookies();
   const token = cookieStore.get("token")?.value;
-
   if (!token) redirect("/login");
 
   return (

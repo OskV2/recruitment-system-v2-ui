@@ -19,7 +19,7 @@ const DashboardItem = ({ title, href, icon }) => {
     )} 
     href={href} 
     >
-      <DynamicIcon name={icon} color={ isActive ? '#532bc3' : '#959499'} size={20} />
+      <DynamicIcon name={icon} color={ isActive ? '#fff' : '#959499'} size={20} />
       {title}
     </Link>
   );

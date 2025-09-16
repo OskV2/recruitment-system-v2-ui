@@ -1,8 +1,5 @@
-
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card } from '@/components/ui/card';
-
-
 
 import TableLocations from '@/components/Tables/TableLocations';
 import TableContractTypes from '@/components/Tables/TableContractTypes';

@@ -105,7 +105,7 @@
   --sidebar: oklch(.244 .006 285.97);  /* Sidebar background */ 
   --sidebar-foreground: oklch(66.895% 0.00743 295.14);  /* Text color in sidebar */
   --sidebar-primary: oklch(44.658% 0.21637 285.719);  /* Primary color for sidebar - Buttons, Active element etc*/
-  --sidebar-primary-foreground: oklch(78.577% 0.00009 271.152);  /* Text color in sidebar when its active card */
+  --sidebar-primary-foreground: oklch(100% 0.00011 271.152);  /* Text color in sidebar when its active card */
   --sidebar-accent: oklch(.274 .006 286.033);  /* For hover */
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);

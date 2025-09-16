@@ -1,5 +1,4 @@
 'use client';
-import React from 'react';
 import { useRouter } from 'next/navigation';
 import { loginUser } from '@/lib/api/auth';
 
@@ -7,14 +6,12 @@ import { useAuthStore } from '@/stores/useAuthStore';
 
 const loginPage = () => {
   const router = useRouter();
-  const { email, password, setEmail, setPassword, setLoggedUser } = useAuthStore();
+  const { email, password, setEmail, setPassword } = useAuthStore();
 
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      const loggedUser = await loginUser({ email, password });
-      //  move this fucker to local storage cause he crashes the app on refresh, who would have thought that js cleans its memory on page refresh
-      setLoggedUser(loggedUser.data)
+      await loginUser({ email, password });
       router.push('/dashboard');
     } catch (err) {
       console.log(err);
