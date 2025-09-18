@@ -18,9 +18,9 @@ const manageCompanyPage = () => {
         </TabsList>
 
         <TabsContent value="locations">
-          <Card>
+          {/* <Card> */}
             <TableLocations />
-          </Card>
+          {/* </Card> */}
         </TabsContent>
         <TabsContent value="ct">
           <Card>

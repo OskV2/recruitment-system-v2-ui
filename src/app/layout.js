@@ -1,4 +1,4 @@
-import { Providers } from '@/lib/queryClient';
+import { Providers } from '@/lib/queries/queryClient';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 
