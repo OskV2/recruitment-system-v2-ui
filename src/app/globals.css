@@ -109,31 +109,31 @@ html {
 }
 
 .dark {
-  --background: oklch(20.989% 0.00393 285.975);  /* App background */ 
-  --foreground: oklch(0.985 0 0);  /* Text color in app */
-  --card: oklch(.244 .006 285.97);
-  --card-foreground: oklch(0.985 0 0);
+  --background: hsl(0, 0%, 5%);  /* App background */ 
+  --foreground: hsl(0, 0%, 95%);  /* Text color in app */
+  --card: hsl(0, 0%, 10%);  /* Card background */
+  --card-foreground: hsl(0, 0%, 95%);  /* Text color in card */
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(44.658% 0.21637 285.719);  /* Primary color for buttons */
+  --primary: hsl(256, 64%, 50%);  /* Primary color for buttons */
   --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(30.182% 0.10096 290.809);  /* Secondary color for buttons */
+  --secondary: hsl(256, 64%, 25%);  /* Secondary color for buttons */
   --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(66.895% 0.00743 295.14);
+  --muted: hsl(0, 0%, 18%);
+  --muted-foreground: hsl(0, 0%, 70%);
   --accent: oklch(.274 .006 286.033);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(33.01% 0.00526 286.01);  /* Default color of border */
-  --input: oklch(.244 .006 285.97);  /* Background color for input */
+  --border: hsl(0, 0%, 20%);  /* Default color of border */
+  --input: hsl(0, 0%, 10%);  /* Background color for input */
   --ring: oklch(0.556 0 0);
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(.244 .006 285.97);  /* Sidebar background */ 
-  --sidebar-foreground: oklch(66.895% 0.00743 295.14);  /* Text color in sidebar */
+  --sidebar: hsl(0, 0%, 10%);  /* Sidebar background */ 
+  --sidebar-foreground: hsl(0, 0%, 70%);  /* Text color in sidebar */
   --sidebar-primary: oklch(44.658% 0.21637 285.719);  /* Primary color for sidebar - Buttons, Active element etc*/
   --sidebar-primary-foreground: oklch(100% 0.00011 271.152);  /* Text color in sidebar when its active card */
   --sidebar-accent: oklch(.274 .006 286.033);  /* For hover */

@@ -10,7 +10,7 @@ function Table({
 }) {
   //  This table backgronud can be changed later, there is something i dont like about it
   return (
-    <div data-slot="table-container" className="relative w-full overflow-auto">
+    <div data-slot="table-container" className="relative w-full overflow-auto rounded-md">
       <table
         data-slot="table"
         className={cn("w-full caption-bottom text-sm", className)}
@@ -26,7 +26,7 @@ function TableHeader({
   return (
     <thead
       data-slot="table-header"
-      className={cn("[&_tr]:border-b", className)}
+      className={cn("[&_tr]:border-b bg-card rounded-md hover:none", className)}
       {...props} />
   );
 }
@@ -63,7 +63,9 @@ function TableRow({
     <tr
       data-slot="table-row"
       className={cn(
-        "hover:bg-primary/10 text-muted-foreground data-[state=selected]:text-foreground data-[state=selected]:bg-primary/10 transition-colors",
+        "border-b text-muted-foreground transition-colors",
+        "hover:bg-primary/10",  //  Hover
+        "data-[state=selected]:bg-primary/10 data-[state=selected]:text-foreground",  //  Selected
         className
       )}
       {...props} />

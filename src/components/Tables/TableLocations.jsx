@@ -28,7 +28,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { DialogCreateLocation, DialogEditLocation, DialogDeleteLocation } from '../Dialogs/Location';
 
 //  ----------------  Data
-import { useLocations, useCreateLocation } from '@/lib/queries/location';
+import { useLocations } from '@/lib/queries/location';
 
 //  ----------------  Icons
 import { ArrowUpDown } from 'lucide-react';
@@ -146,7 +146,7 @@ const DataTable = () => {
           <DialogCreateLocation />
         </div>
       </div>
-      <div className="rounded-md border my-4">
+      <div className="rounded-md my-4">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (

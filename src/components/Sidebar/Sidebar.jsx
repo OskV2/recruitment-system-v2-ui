@@ -70,7 +70,7 @@ const fourthGroup = [
 
 const DashboardSidebar = () => {
   return (
-    <div className="bg-sidebar h-full p-4 w-64 rounded-2xl border">
+    <div className="bg-sidebar h-full p-4 w-60 border">
       <div className="mb-8">Logo</div>
 
       <SidebarGroup groupTitle="MAIN">
