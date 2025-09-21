@@ -1,6 +1,36 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+html {
+  font-size: 16px;
+}
+
+@media (max-width: 1366px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -85,17 +115,17 @@
   --card-foreground: oklch(0.985 0 0);
   --popover: oklch(0.205 0 0);
   --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(44.658% 0.21637 285.719);
+  --primary: oklch(44.658% 0.21637 285.719);  /* Primary color for buttons */
   --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
+  --secondary: oklch(30.182% 0.10096 290.809);  /* Secondary color for buttons */
   --secondary-foreground: oklch(0.985 0 0);
   --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
+  --muted-foreground: oklch(66.895% 0.00743 295.14);
   --accent: oklch(.274 .006 286.033);
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(27.353% 0.00368 286.036);  /* Default color of border */
-  --input: oklch(1 0 0 / 15%);
+  --border: oklch(33.01% 0.00526 286.01);  /* Default color of border */
+  --input: oklch(.244 .006 285.97);  /* Background color for input */
   --ring: oklch(0.556 0 0);
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);

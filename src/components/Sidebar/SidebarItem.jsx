@@ -14,7 +14,7 @@ const DashboardItem = ({ title, href, icon }) => {
     <Link className={cn(
       'flex flex-row items-center gap-4 mb-2 text-sidebar-foreground text-base p-2 rounded-md hover:bg-sidebar-accent',
       isActive
-      ? 'bg-gradient-to-r from-[var(--sidebar-primary)]/75 from-25% to-[var(--sidebar)] text-sidebar-primary-foreground'
+      ? 'bg-gradient-to-r from-[var(--sidebar-primary)]/30 from-25% to-[var(--sidebar)] text-sidebar-primary-foreground'
       : ''
     )} 
     href={href} 

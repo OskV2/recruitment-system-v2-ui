@@ -8,8 +8,9 @@ function Table({
   className,
   ...props
 }) {
+  //  This table backgronud can be changed later, there is something i dont like about it
   return (
-    <div data-slot="table-container" className="relative w-full overflow-x-auto">
+    <div data-slot="table-container" className="relative w-full overflow-auto">
       <table
         data-slot="table"
         className={cn("w-full caption-bottom text-sm", className)}
@@ -62,7 +63,7 @@ function TableRow({
     <tr
       data-slot="table-row"
       className={cn(
-        "hover:bg-muted/50 data-[state=selected]:bg-muted border-b transition-colors",
+        "hover:bg-primary/10 text-muted-foreground data-[state=selected]:text-foreground data-[state=selected]:bg-primary/10 transition-colors",
         className
       )}
       {...props} />

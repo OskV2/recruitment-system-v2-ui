@@ -7,8 +7,6 @@ import TableContractTypes from '@/components/Tables/TableContractTypes';
 const manageCompanyPage = () => {
   return (
     <>
-      <div>manageCompanyPage</div>
-
       <Tabs defaultValue="locations" className="w-100%">
         <TabsList>
           <TabsTrigger value="locations">Locations</TabsTrigger>
