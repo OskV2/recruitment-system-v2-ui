@@ -5,14 +5,15 @@ export const getAllLocations = async () => {
   return await api.get(`/location`);
 };
 
-export const createLocation = async () => {
-  return await api.post(`/location`);
+export const createLocation = async ({data}) => {
+  return await api.post(`/location`, data);
 };
 
-export const editLocation = async (id) => {
-  return await api.patch(`/location/${id}`);
+export const editLocation = async ({id, data}) => {
+  return await api.patch(`/location/${id}`, data);
 };
 
-export const deleteLocation = async (id) => {
+export const deleteLocation = async ({id}) => {
+  console.log(id)
   return await api.delete(`/location/${id}`);
 };

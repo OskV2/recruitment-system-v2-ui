@@ -31,17 +31,15 @@ import { DialogCreateLocation, DialogEditLocation, DialogDeleteLocation } from '
 import { useLocations, useCreateLocation } from '@/lib/queries/location';
 
 //  ----------------  Icons
-import { ArrowUpDown, MoreHorizontal } from 'lucide-react';
+import { ArrowUpDown } from 'lucide-react';
 
 const DataTable = () => {
   const [sorting, setSorting] = React.useState([]);
-  const [columnFilters, setColumnFilters] = React.useState([]);
   const [columnVisibility, setColumnVisibility] = React.useState({});
   const [rowSelection, setRowSelection] = React.useState({});
 
   //  Fetch locations
   const { data: locations, isLoading, error } = useLocations();
-  const createLocation = useCreateLocation();
 
   const columns = [
     {
@@ -84,6 +82,9 @@ const DataTable = () => {
     {
       accessorKey: 'description',
       header: 'Description',
+      meta: {
+        className: "max-w-64 truncate",
+      },
     },
     {
       accessorKey: 'createdat',
@@ -95,14 +96,15 @@ const DataTable = () => {
       cell: ({ row }) => {
         const location = row.original;
 
-        console.log(location)
-
         return (
           <div className='flex gap-4'>
             <DialogEditLocation location={location} />
             <DialogDeleteLocation location={location} />
           </div>
         );
+      },
+      meta: {
+        className: "w-0",
       },
     },
   ];
@@ -124,7 +126,7 @@ const DataTable = () => {
     },
   });
 
-  //  ! ALSO LOADING NEEDS TO BE IMPROVED BECAUSE NOW ITS JUST P
+  //  ALSO LOADING NEEDS TO BE IMPROVED BECAUSE NOW ITS JUST P
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Something went wrong</p>;
 
@@ -140,11 +142,11 @@ const DataTable = () => {
           className="max-w-sm"
         />
         <div className="flex gap-4">
-          <Button>Delete many</Button>
-          <Button>Add</Button>
+          {Object.keys(rowSelection).length > 0 && <Button variant='destructive'>Delete many</Button>} { /* Deleting does not work for now ok? */ }
+          <DialogCreateLocation />
         </div>
       </div>
-      <div className="overflow-hidden rounded-md border my-4">
+      <div className="rounded-md border my-4">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -172,7 +174,7 @@ const DataTable = () => {
                   data-state={row.getIsSelected() && 'selected'}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell key={cell.id} className={cell.column.columnDef.meta?.className}>
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
@@ -196,7 +198,7 @@ const DataTable = () => {
       </div>
       <div className="flex gap-4">
         <Button
-          variant="outline"
+          variant="secondary"
           size="sm"
           onClick={() => table.previousPage()}
           disabled={!table.getCanPreviousPage()}
@@ -204,7 +206,7 @@ const DataTable = () => {
           Previous
         </Button>
         <Button
-          variant="outline"
+          variant="secondary"
           size="sm"
           onClick={() => table.nextPage()}
           disabled={!table.getCanNextPage()}
