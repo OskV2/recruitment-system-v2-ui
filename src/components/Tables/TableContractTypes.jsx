@@ -1,84 +1,220 @@
 'use client'
 
+import { useState } from 'react';
+
+//  ----------------  Tanstack Table
+import {
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from '@tanstack/react-table';
+
+//  ----------------  UI
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { Pencil, Trash2Icon } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
 
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { getAllContractTypes, createContractType } from '@/lib/api/contract-type';
+import { DialogCreateContractType, DialogEditContractType, DialogDeleteContractType } from '../Dialogs/ContractType';
+
+//  ----------------  Data
+import { useContracType } from '@/lib/queries/contract-type'
+
+//  ----------------  Icons
+import { ArrowUpDown } from 'lucide-react';
+
 
 const TableContractTypes = () => {
-  const queryClient = useQueryClient();
+  const { data: contractTypes, isLoading, error } = useContracType()
 
-  //  Fetch locations
-  const {
-    data: contractTypes,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ['contract-type'],
-    queryFn: getAllContractTypes,
-  });
+    const [sorting, setSorting] = useState([]);
+    const [columnVisibility, setColumnVisibility] = useState({});
+    const [rowSelection, setRowSelection] = useState({});
 
-  console.log(contractTypes)
-
-  //  ! COME BACK TO THIS
-  // Mutation for adding new user
-  const mutation = useMutation({
-    mutationFn: createContractType,
-    onSuccess: () => {
-      // Refetch users list after creating
-      queryClient.invalidateQueries({ queryKey: ['contract-type'] });
+    const columns = [
+    {
+      id: 'select',
+      header: ({ table }) => (
+        <Checkbox
+          checked={
+            table.getIsAllPageRowsSelected() ||
+            (table.getIsSomePageRowsSelected() && 'indeterminate')
+          }
+          onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+          aria-label="Select all"
+        />
+      ),
+      cell: ({ row }) => (
+        <Checkbox
+          checked={row.getIsSelected()}
+          onCheckedChange={(value) => row.toggleSelected(!!value)}
+          aria-label="Select row"
+        />
+      ),
+      enableSorting: false,
+      enableHiding: false,
     },
-  });
+    {
+      accessorKey: 'name',
+      header: ({ column }) => {
+        return (
+          <div
+            className="flex gap cursor-pointer"
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
+          >
+            Name
+            <ArrowUpDown className="ml-2 h-4 w-4" />
+          </div>
+        );
+      },
+    },
+    {
+      accessorKey: 'description',
+      header: 'Description',
+      meta: {
+        className: "max-w-64 truncate",
+      },
+    },
+    {
+      accessorKey: 'createdAt',
+      header: 'Created at',
+    },
+    {
+      accessorKey: 'actions',
+      header: 'Actions',
+      cell: ({ row }) => {
+        const ct = row.original;
 
-  //  ! ALSO LOADING NEEDS TO BE IMPROVED BECAUSE NOW ITS JUST P  
+        return (
+          <div className='flex gap-4'>
+            <DialogEditContractType ct={ct} />
+            <DialogDeleteContractType ct={ct} />
+          </div>
+        );
+      },
+      meta: {
+        className: "w-0",
+      },
+    },
+  ];
+
+
+    const table = useReactTable({
+      data: contractTypes?.data,
+      columns: columns,
+      getCoreRowModel: getCoreRowModel(),
+      onSortingChange: setSorting,
+      getSortedRowModel: getSortedRowModel(),
+      getFilteredRowModel: getFilteredRowModel(),
+      onColumnVisibilityChange: setColumnVisibility,
+      onRowSelectionChange: setRowSelection,
+      getPaginationRowModel: getPaginationRowModel(),
+      state: {
+        sorting,
+        columnVisibility,
+        rowSelection,
+      },
+    });
+
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Something went wrong</p>;
 
   return (
-    <Table>
-      <TableCaption>All contracts offered by company.</TableCaption>
-      <TableHeader>
-        <TableRow>
-          <TableHead className="w-[200px]">ID</TableHead>
-          <TableHead>Name</TableHead>
-          <TableHead>Description</TableHead>
-          <TableHead>Created At</TableHead>
-          <TableHead>Actions</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {contractTypes.data.map((data) => (
-          <TableRow key={data.id}>
-            <TableCell className="font-medium">{data.id}</TableCell>
-            <TableCell className="font-medium">{data.name}</TableCell>
-            <TableCell>{data.description}</TableCell>
-            <TableCell>{data.createdAt}</TableCell>
-            <TableCell>
-              <div className="flex">
-                <Pencil />
-                <Trash2Icon />
-              </div>
-            </TableCell>
-          </TableRow>
-        ))}
-      </TableBody>
-      <TableFooter>
-        {/* <TableRow>
-          <TableCell colSpan={3}>Total</TableCell>
-          <TableCell className="text-right">$2,500.00</TableCell>
-        </TableRow> */}
-      </TableFooter>
-    </Table>
+    <div>
+      <div className="flex items-center justify-between my-4">
+        <Input
+          placeholder="Filter locations"
+          value={table.getColumn('name')?.getFilterValue() ?? ''}
+          onChange={(event) =>
+            table.getColumn('name')?.setFilterValue(event.target.value)
+          }
+          className="max-w-sm"
+        />
+        <div className="flex gap-4">
+          {Object.keys(rowSelection).length > 0 && <Button variant='destructive'>Delete</Button>} { /* Deleting does not work for now ok? */ }
+          <DialogCreateContractType />
+        </div>
+      </div>
+      <div className="rounded-md my-4">
+        <Table>
+          <TableHeader>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <TableRow key={headerGroup.id}>
+                {headerGroup.headers.map((header) => {
+                  return (
+                    <TableHead key={header.id}>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                    </TableHead>
+                  );
+                })}
+              </TableRow>
+            ))}
+          </TableHeader>
+          <TableBody>
+            {table.getRowModel().rows?.length ? (
+              table.getRowModel().rows.map((row) => (
+                <TableRow
+                  key={row.id}
+                  data-state={row.getIsSelected() && 'selected'}
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <TableCell key={cell.id} className={cell.column.columnDef.meta?.className}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
+                      )}
+                    </TableCell>
+                  ))}
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell
+                  colSpan={columns.length}
+                  className="h-24 text-center"
+                >
+                  No results.
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </div>
+      <div className="flex gap-4">
+        <Button
+          variant="secondary"
+          size="sm"
+          onClick={() => table.previousPage()}
+          disabled={!table.getCanPreviousPage()}
+        >
+          Previous
+        </Button>
+        <Button
+          variant="secondary"
+          size="sm"
+          onClick={() => table.nextPage()}
+          disabled={!table.getCanNextPage()}
+        >
+          Next
+        </Button>
+      </div>
+    </div>
   );
 };
 
