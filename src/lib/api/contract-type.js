@@ -1,6 +1,5 @@
 import { api } from '@/lib/api/axios';
 
-// Fetch all users
 export const getAllContractTypes = async () => {
   return await api.get(`/contract`);
 };

@@ -14,6 +14,5 @@ export const editLocation = async ({id, data}) => {
 };
 
 export const deleteLocation = async ({id}) => {
-  console.log(id)
   return await api.delete(`/location/${id}`);
 };
