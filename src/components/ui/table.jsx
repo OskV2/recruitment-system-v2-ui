@@ -26,7 +26,7 @@ function TableHeader({
   return (
     <thead
       data-slot="table-header"
-      className={cn("[&_tr]:border-b bg-card rounded-md hover:none", className)}
+      className={cn("[&_tr]:border-b bg-card rounded-md", className)}
       {...props} />
   );
 }
@@ -64,8 +64,8 @@ function TableRow({
       data-slot="table-row"
       className={cn(
         "border-b text-muted-foreground transition-colors",
-        "hover:bg-primary/10",  //  Hover
-        "data-[state=selected]:bg-primary/10 data-[state=selected]:text-foreground",  //  Selected
+        "hover:bg-card/70",  //  Hover
+        "data-[state=selected]:bg-card data-[state=selected]:text-foreground",  //  Selected
         className
       )}
       {...props} />
