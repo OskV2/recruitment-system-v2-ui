@@ -1,5 +1,7 @@
 import SidebarGroup from './SidebarGroup';
 import SidebarItem from './SidebarItem';
+import SidebarHeader from './SidebarHeader';
+import SidebarFooter from './SidebarFooter';
 
 const firstGroup = [
   {
@@ -68,54 +70,62 @@ const fourthGroup = [
   },
 ];
 
-const DashboardSidebar = () => {
+const DashboardSidebar = ({ userId }) => {
   return (
-    <div className="bg-sidebar h-full p-4 w-60 border">
-      <div className="mb-8">Logo</div>
+    <div className="flex flex-col bg-sidebar h-full p-4 min-w-56 border">
+      
+      <SidebarHeader userId={userId} />
 
-      <SidebarGroup groupTitle="MAIN">
-        {firstGroup.map((item) => (
-          <SidebarItem
+      <div className='overflow-y-scroll'>
+        <SidebarGroup groupTitle="MAIN">
+          {firstGroup.map((item) => (
+            <SidebarItem
             title={item.title}
             href={item.href}
             icon={item.icon}
             key={item.title}
-          />
-        ))}
-      </SidebarGroup>
+            />
+          ))}
+        </SidebarGroup>
 
-      <SidebarGroup groupTitle="JOB OFFERS">
-        {secondGroup.map((item) => (
-          <SidebarItem
+        <SidebarGroup groupTitle="JOB OFFERS">
+          {secondGroup.map((item) => (
+            <SidebarItem
             title={item.title}
             href={item.href}
             icon={item.icon}
             key={item.title}
-          />
-        ))}
-      </SidebarGroup>
+            />
+          ))}
+        </SidebarGroup>
 
-      <SidebarGroup groupTitle="USERS">
-        {thirdGroup.map((item) => (
-          <SidebarItem
+        <SidebarGroup groupTitle="USERS">
+          {thirdGroup.map((item) => (
+            <SidebarItem
             title={item.title}
             href={item.href}
             icon={item.icon}
             key={item.title}
-          />
-        ))}
-      </SidebarGroup>
+            />
+          ))}
+        </SidebarGroup>
 
-      <SidebarGroup groupTitle="SYSTEM">
-        {fourthGroup.map((item) => (
-          <SidebarItem
+        <SidebarGroup groupTitle="SYSTEM">
+          {fourthGroup.map((item) => (
+            <SidebarItem
             title={item.title}
             href={item.href}
             icon={item.icon}
             key={item.title}
-          />
-        ))}
-      </SidebarGroup>
+            />
+          ))}
+        </SidebarGroup>
+      </div>
+      
+      
+
+
+      <SidebarFooter />
     </div>
   );
 };

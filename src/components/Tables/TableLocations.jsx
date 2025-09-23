@@ -1,6 +1,6 @@
 'use client';
 
-import * as React from 'react';
+import { useState } from 'react';
 
 //  ----------------  Tanstack Table
 import {
@@ -34,9 +34,9 @@ import { useLocations } from '@/lib/queries/location';
 import { ArrowUpDown } from 'lucide-react';
 
 const DataTable = () => {
-  const [sorting, setSorting] = React.useState([]);
-  const [columnVisibility, setColumnVisibility] = React.useState({});
-  const [rowSelection, setRowSelection] = React.useState({});
+  const [sorting, setSorting] = useState([]);
+  const [columnVisibility, setColumnVisibility] = useState({});
+  const [rowSelection, setRowSelection] = useState({});
 
   //  Fetch locations
   const { data: locations, isLoading, error } = useLocations();
@@ -65,7 +65,11 @@ const DataTable = () => {
       enableHiding: false,
     },
     {
-      accessorKey: 'name',
+      accessorKey: 'country',
+      header: 'Country'
+    },
+    {
+      accessorKey: 'city',
       header: ({ column }) => {
         return (
           <div
@@ -73,7 +77,7 @@ const DataTable = () => {
             variant="ghost"
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
-            Name
+            City
             <ArrowUpDown className="ml-2 h-4 w-4" />
           </div>
         );
@@ -87,7 +91,7 @@ const DataTable = () => {
       },
     },
     {
-      accessorKey: 'createdat',
+      accessorKey: 'createdAt',
       header: 'Created at',
     },
     {
@@ -135,14 +139,14 @@ const DataTable = () => {
       <div className="flex items-center justify-between my-4">
         <Input
           placeholder="Filter locations"
-          value={table.getColumn('name')?.getFilterValue() ?? ''}
+          value={table.getColumn('city')?.getFilterValue() ?? ''}
           onChange={(event) =>
             table.getColumn('name')?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
         <div className="flex gap-4">
-          {Object.keys(rowSelection).length > 0 && <Button variant='destructive'>Delete many</Button>} { /* Deleting does not work for now ok? */ }
+          {Object.keys(rowSelection).length > 0 && <Button variant='destructive'>Delete</Button>} { /* Deleting does not work for now ok? */ }
           <DialogCreateLocation />
         </div>
       </div>

@@ -3,15 +3,18 @@ import { useRouter } from 'next/navigation';
 import { loginUser } from '@/lib/api/auth';
 
 import { useAuthStore } from '@/stores/useAuthStore';
+import { useUserStore } from '@/stores/useUserStore';
 
 const loginPage = () => {
   const router = useRouter();
   const { email, password, setEmail, setPassword } = useAuthStore();
+  const { setUser } = useUserStore()
 
   async function handleSubmit(e) {
     e.preventDefault();
     try {
-      await loginUser({ email, password });
+      const user = await loginUser({ email, password });
+      setUser(user)
       router.push('/dashboard');
     } catch (err) {
       console.log(err);

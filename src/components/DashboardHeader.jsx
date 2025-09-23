@@ -11,8 +11,6 @@ const DashboardHeader = () => {
   const { loggedUser } = useAuthStore();
   const item = headings[Math.floor(Math.random() * headings.length)];
 
-  console.log(loggedUser)  
-
   return (
     <p>
       {loggedUser && `Hi, ${loggedUser.name}! ${item}.`}
