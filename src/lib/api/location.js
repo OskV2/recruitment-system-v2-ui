@@ -1,6 +1,5 @@
 import { api } from '@/lib/api/axios';
 
-// Fetch all locations
 export const getAllLocations = async () => {
   return await api.get(`/location`);
 };

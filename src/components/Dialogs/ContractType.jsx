@@ -13,11 +13,7 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import {
-  useCreateLocation,
-  useEditLocation,
-  useDeleteLocation,
-} from '@/lib/queries/location';
+import { useCreateContracType, useEditContractType, useDeleteContractType } from '@/lib/queries/contract-type';
 
 import { useContractTypeStore } from '@/stores/useContractTypeStore';
 import { Pencil, Trash2Icon } from 'lucide-react';
@@ -26,7 +22,7 @@ import { useState } from 'react';
 export const DialogCreateContractType = () => {
   const [open, setOpen] = useState(false);
   const { name, description, setName, setDescription, reset } = useContractTypeStore();
-  const { mutate, isPending } = useCreateLocation();
+  const { mutate, isPending } = useCreateContracType();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -60,7 +56,7 @@ export const DialogCreateContractType = () => {
       <DialogContent className="sm:max-w-[512px]">
         <form onSubmit={handleSubmit}>
           <DialogHeader className='mb-8'>
-            <DialogTitle>Create location</DialogTitle>
+            <DialogTitle>Create contract type</DialogTitle>
             <DialogDescription>
               Create new location. Click save when you&apos;re done.
             </DialogDescription>
@@ -99,16 +95,19 @@ export const DialogCreateContractType = () => {
   );
 };
 
-export const DialogEditContractType = ({ location }) => {
-  const [open, setOpen] = useState(false);
+export const DialogEditContractType = ({ ct }) => {
+  const [ open, setOpen ] = useState(false);
   const { name, description, setName, setDescription, setContractType, reset } = useContractTypeStore();
-  const { mutate, isPending } = useEditLocation();
+  const { mutate, isPending } = useEditContractType();
 
   const handleSubmit = (e) => {
+
+    console.log(ct.id)
+
     e.preventDefault();
     mutate(
       {
-        id: location.id,
+        id: ct.id,
         data: {
           name,
           description,
@@ -128,7 +127,7 @@ export const DialogEditContractType = ({ location }) => {
       open={open}
       onOpenChange={(o) => {
         setOpen(o);
-        setContractType(location)
+        setContractType(ct)
         if (!o) reset();
       }}
     >
@@ -140,9 +139,9 @@ export const DialogEditContractType = ({ location }) => {
       <DialogContent className="sm:max-w-[512px]">
         <form onSubmit={handleSubmit}>
           <DialogHeader className='mb-8'>
-            <DialogTitle>Edit location</DialogTitle>
+            <DialogTitle>Edit contract type</DialogTitle>
             <DialogDescription>
-              Make changes to office location details here. Click save when
+              Make changes to contract type details here. Click save when
               you&apos;re done.
             </DialogDescription>
           </DialogHeader>
@@ -181,7 +180,7 @@ export const DialogEditContractType = ({ location }) => {
 };
 
 export const DialogDeleteContractType = ({ ct }) => {
-  const { mutate, isPending } = useDeleteLocation();
+  const { mutate, isPending } = useDeleteContractType();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -197,12 +196,12 @@ export const DialogDeleteContractType = ({ ct }) => {
           <Trash2Icon />
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[512px]">
         <form onSubmit={handleSubmit}>
           <DialogHeader className='mb-4'>
-            <DialogTitle className='mb-2'>Delete location</DialogTitle>
+            <DialogTitle className='mb-2'>Delete contract type</DialogTitle>
             <DialogDescription>
-              Are you sure you want to delete location:{' '}
+              Are you sure you want to delete contract type:{' '}
               <strong>{ct.name}</strong>
             </DialogDescription>
           </DialogHeader>

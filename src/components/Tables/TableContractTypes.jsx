@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { useState } from 'react';
 
@@ -25,23 +25,26 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 
-import { DialogCreateContractType, DialogEditContractType, DialogDeleteContractType } from '../Dialogs/ContractType';
+import {
+  DialogCreateContractType,
+  DialogEditContractType,
+  DialogDeleteContractType,
+} from '../Dialogs/ContractType';
 
 //  ----------------  Data
-import { useContracType } from '@/lib/queries/contract-type'
+import { useContracType } from '@/lib/queries/contract-type';
 
 //  ----------------  Icons
 import { ArrowUpDown } from 'lucide-react';
 
-
 const TableContractTypes = () => {
-  const { data: contractTypes, isLoading, error } = useContracType()
+  const { data: contractTypes, isLoading, error } = useContracType();
 
-    const [sorting, setSorting] = useState([]);
-    const [columnVisibility, setColumnVisibility] = useState({});
-    const [rowSelection, setRowSelection] = useState({});
+  const [sorting, setSorting] = useState([]);
+  const [columnVisibility, setColumnVisibility] = useState({});
+  const [rowSelection, setRowSelection] = useState({});
 
-    const columns = [
+  const columns = [
     {
       id: 'select',
       header: ({ table }) => (
@@ -83,12 +86,16 @@ const TableContractTypes = () => {
       accessorKey: 'description',
       header: 'Description',
       meta: {
-        className: "max-w-64 truncate",
+        className: 'max-w-64 truncate',
       },
     },
     {
       accessorKey: 'createdAt',
       header: 'Created at',
+      cell: ({ row }) => {
+        const date = new Date(row.original.createdAt);
+        return <p>{date.toLocaleString()}</p>;
+      },
     },
     {
       accessorKey: 'actions',
@@ -97,52 +104,46 @@ const TableContractTypes = () => {
         const ct = row.original;
 
         return (
-          <div className='flex gap-4'>
+          <div className="flex gap-4">
             <DialogEditContractType ct={ct} />
             <DialogDeleteContractType ct={ct} />
           </div>
         );
       },
       meta: {
-        className: "w-0",
+        className: 'w-0',
       },
     },
   ];
 
-
-    const table = useReactTable({
-      data: contractTypes?.data,
-      columns: columns,
-      getCoreRowModel: getCoreRowModel(),
-      onSortingChange: setSorting,
-      getSortedRowModel: getSortedRowModel(),
-      getFilteredRowModel: getFilteredRowModel(),
-      onColumnVisibilityChange: setColumnVisibility,
-      onRowSelectionChange: setRowSelection,
-      getPaginationRowModel: getPaginationRowModel(),
-      state: {
-        sorting,
-        columnVisibility,
-        rowSelection,
-      },
-    });
+  const table = useReactTable({
+    data: contractTypes?.data,
+    columns: columns,
+    getCoreRowModel: getCoreRowModel(),
+    onSortingChange: setSorting,
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    onColumnVisibilityChange: setColumnVisibility,
+    onRowSelectionChange: setRowSelection,
+    getPaginationRowModel: getPaginationRowModel(),
+    state: {
+      sorting,
+      columnVisibility,
+      rowSelection,
+    },
+  });
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Something went wrong</p>;
 
   return (
     <div>
-      <div className="flex items-center justify-between my-4">
-        <Input
-          placeholder="Filter locations"
-          value={table.getColumn('name')?.getFilterValue() ?? ''}
-          onChange={(event) =>
-            table.getColumn('name')?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
+      <div className="flex items-center justify-end mt-6 mb-4">
         <div className="flex gap-4">
-          {Object.keys(rowSelection).length > 0 && <Button variant='destructive'>Delete</Button>} { /* Deleting does not work for now ok? */ }
+          {Object.keys(rowSelection).length > 0 && (
+            <Button variant="destructive">Delete</Button>
+          )}{' '}
+          {/* Deleting does not work for now ok? */}
           <DialogCreateContractType />
         </div>
       </div>
@@ -174,7 +175,10 @@ const TableContractTypes = () => {
                   data-state={row.getIsSelected() && 'selected'}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id} className={cell.column.columnDef.meta?.className}>
+                    <TableCell
+                      key={cell.id}
+                      className={cell.column.columnDef.meta?.className}
+                    >
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext()
