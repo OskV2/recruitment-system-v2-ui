@@ -72,7 +72,7 @@ const fourthGroup = [
 
 const DashboardSidebar = ({ userId }) => {
   return (
-    <div className="flex flex-col bg-sidebar h-full p-4 min-w-56 border">
+    <div className="flex flex-col bg-sidebar h-full pt-2 pb-4 px-4 min-w-56 max-w-56 border">
       
       <SidebarHeader userId={userId} />
 
