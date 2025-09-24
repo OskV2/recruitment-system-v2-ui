@@ -73,57 +73,33 @@ const fourthGroup = [
 const DashboardSidebar = ({ userId }) => {
   return (
     <div className="flex flex-col bg-sidebar h-full pt-2 pb-4 px-4 min-w-56 max-w-56 border">
-      
       <SidebarHeader userId={userId} />
 
-      <div className='overflow-y-scroll'>
+      <div className="overflow-y-scroll">
         <SidebarGroup groupTitle="MAIN">
           {firstGroup.map((item) => (
-            <SidebarItem
-            title={item.title}
-            href={item.href}
-            icon={item.icon}
-            key={item.title}
-            />
+            <SidebarItem key={item.title} {...item} />
           ))}
         </SidebarGroup>
 
         <SidebarGroup groupTitle="JOB OFFERS">
           {secondGroup.map((item) => (
-            <SidebarItem
-            title={item.title}
-            href={item.href}
-            icon={item.icon}
-            key={item.title}
-            />
+            <SidebarItem key={item.title} {...item} />
           ))}
         </SidebarGroup>
 
         <SidebarGroup groupTitle="USERS">
           {thirdGroup.map((item) => (
-            <SidebarItem
-            title={item.title}
-            href={item.href}
-            icon={item.icon}
-            key={item.title}
-            />
+            <SidebarItem key={item.title} {...item} />
           ))}
         </SidebarGroup>
 
         <SidebarGroup groupTitle="SYSTEM">
           {fourthGroup.map((item) => (
-            <SidebarItem
-            title={item.title}
-            href={item.href}
-            icon={item.icon}
-            key={item.title}
-            />
+            <SidebarItem key={item.title} {...item} />
           ))}
         </SidebarGroup>
       </div>
-      
-      
-
 
       <SidebarFooter />
     </div>

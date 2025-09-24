@@ -93,6 +93,10 @@ const DataTable = () => {
     {
       accessorKey: 'createdAt',
       header: 'Created at',
+      cell: ({ row }) => {
+        const date = new Date(row.original.createdAt)
+        return <p>{date.toLocaleString()}</p>
+      }
     },
     {
       accessorKey: 'actions',
@@ -136,7 +140,7 @@ const DataTable = () => {
 
   return (
     <div>
-      <div className="flex items-center justify-between my-4">
+      <div className="flex items-center justify-between mt-6 mb-4">
         <Input
           placeholder="Filter locations"
           value={table.getColumn('city')?.getFilterValue() ?? ''}

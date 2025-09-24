@@ -23,9 +23,8 @@ import { Pencil, Trash2Icon } from 'lucide-react';
 import { useState } from 'react';
 
 export const DialogCreateLocation = () => {
-  const [open, setOpen] = useState(false);
-  const { name, description, setName, setDescription, reset } =
-    useLocationStore();
+  const [ open, setOpen ] = useState(false);
+  const { country, city, description, setCountry, setCity, setDescription, reset } = useLocationStore();
   const { mutate, isPending } = useCreateLocation();
 
   const handleSubmit = (e) => {
@@ -33,7 +32,8 @@ export const DialogCreateLocation = () => {
     mutate(
       {
         data: {
-          name,
+          country,
+          city,
           description,
         },
       },
@@ -67,12 +67,21 @@ export const DialogCreateLocation = () => {
           </DialogHeader>
           <div className="grid gap-4">
             <div className="grid gap-3">
-              <Label htmlFor="name-1">Name</Label>
+              <Label htmlFor="name-1">Country</Label>
               <Input
                 id="name-1"
                 name="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+              />
+            </div>
+            <div className="grid gap-3">
+              <Label htmlFor="name-1">City</Label>
+              <Input
+                id="name-1"
+                name="name"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
               />
             </div>
             <div className="grid gap-3">
@@ -101,8 +110,7 @@ export const DialogCreateLocation = () => {
 
 export const DialogEditLocation = ({ location }) => {
   const [open, setOpen] = useState(false);
-  const { name, description, setName, setDescription, setLocation, reset } =
-    useLocationStore();
+  const { country, city, description, setCountry, setCity, setDescription, setLocation, reset } = useLocationStore();
   const { mutate, isPending } = useEditLocation();
 
   const handleSubmit = (e) => {
@@ -111,7 +119,8 @@ export const DialogEditLocation = ({ location }) => {
       {
         id: location.id,
         data: {
-          name,
+          country,
+          city,
           description,
         },
       },
@@ -149,12 +158,21 @@ export const DialogEditLocation = ({ location }) => {
           </DialogHeader>
           <div className="grid gap-4">
             <div className="grid gap-3">
-              <Label htmlFor="name-1">Name</Label>
+              <Label htmlFor="name-1">Country</Label>
               <Input
                 id="name-1"
                 name="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+              />
+            </div>
+            <div className="grid gap-3">
+              <Label htmlFor="name-1">City</Label>
+              <Input
+                id="name-1"
+                name="name"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
               />
             </div>
             <div className="grid gap-3">
@@ -198,13 +216,13 @@ export const DialogDeleteLocation = ({ location }) => {
           <Trash2Icon />
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[512px]">
         <form onSubmit={handleSubmit}>
           <DialogHeader className='mb-4'>
             <DialogTitle className='mb-2'>Delete location</DialogTitle>
             <DialogDescription>
               Are you sure you want to delete location:{' '}
-              <strong>{location.name}</strong>
+              <strong>{location.country}, {location.city}</strong>
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
