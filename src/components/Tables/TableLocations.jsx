@@ -33,7 +33,7 @@ import { useLocations } from '@/lib/queries/location';
 //  ----------------  Icons
 import { ArrowUpDown } from 'lucide-react';
 
-const DataTable = () => {
+const TableLocations = () => {
   const [sorting, setSorting] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});
   const [rowSelection, setRowSelection] = useState({});
@@ -226,4 +226,4 @@ const DataTable = () => {
   );
 };
 
-export default DataTable;
+export default TableLocations;
