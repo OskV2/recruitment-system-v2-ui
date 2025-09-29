@@ -40,15 +40,6 @@ const TableRecruitmentSteps = () => {
   const { data: recruitmentSteps, isLoading, error } = useRecruitmentSteps();
   console.log(recruitmentSteps)
 
-  // "id": 1,
-  // "name": "To be done",
-  // "description": "",
-  // "currentStep": false,
-  // "requiresInterview": false,
-  // "deleted": false,
-  // "createdAt": "2025-09-01T19:35:40.263Z",
-  // "updatedAt": "2025-09-01T19:35:40.263Z"
-
   const columns = [
     {
       id: 'select',
