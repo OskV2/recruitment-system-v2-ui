@@ -1,8 +1,10 @@
 import React from 'react'
 
+import TableRecruitmentProcess from '@/components/Tables/TableRecruitmentProcess'
+
 const recruitmentProcessesPage = () => {
   return (
-    <div>recruitmentProcessesPage</div>
+    <TableRecruitmentProcess />
   )
 }
 
